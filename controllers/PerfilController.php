@@ -7,8 +7,14 @@ class PerfilController{
         $idusuario = $_SESSION['usuario']['id'];
         $ultimoForoSQL = "SELECT * FROM foros WHERE id_usuario = $idusuario order by fecha_creacion desc limit 1";
 
+
         $foros = Foros::where('id_usuario', $idusuario, 0);
-        $ultimoForoCreado = new Foros(Foros::executeSQL($ultimoForoSQL)->fetch_assoc());
+        
+        $ultimoForoExiste = Foros::executeSQL($ultimoForoSQL)->fetch_assoc();
+        
+        if($ultimoForoExiste){
+            $ultimoForoCreado = new Foros($ultimoForoExiste);
+        }
 
         $blogs = Blog::where('id_usuario', $idusuario, 0);
 

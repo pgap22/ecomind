@@ -117,7 +117,7 @@
                 </div>
             </div>
         </section>
-        <?php if ($ultimoForoCreado->id) : ?>
+        <?php if (isset($ultimoForoCreado->id)) : ?>
             <section class="mt-4">
                 <h2 class="titulo">Ultimo Foro Creado</h2>
                 <div class="max-w-[320px] mt-4 w-fit relative">
