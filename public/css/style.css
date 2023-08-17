@@ -750,6 +750,10 @@ video {
   aspect-ratio: 1 / 1;
 }
 
+.h-60 {
+  height: 15rem;
+}
+
 .h-\[248px\] {
   height: 248px;
 }
@@ -844,6 +848,10 @@ video {
   max-width: 20rem;
 }
 
+.max-w-xl {
+  max-width: 36rem;
+}
+
 .-translate-x-1\/2 {
   --tw-translate-x: -50%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -905,12 +913,20 @@ video {
   flex-direction: column;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
 .items-end {
   align-items: flex-end;
 }
 
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-end {
@@ -927,6 +943,10 @@ video {
 
 .gap-1 {
   gap: 0.25rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
 }
 
 .gap-12 {
@@ -1001,6 +1021,10 @@ video {
 
 .break-words {
   overflow-wrap: break-word;
+}
+
+.break-all {
+  word-break: break-all;
 }
 
 .rounded-2xl {
@@ -1124,6 +1148,10 @@ video {
   background-color: rgb(0 111 65 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#013B23BF\] {
+  background-color: #013B23BF;
+}
+
 .bg-\[\#013B23\] {
   --tw-bg-opacity: 1;
   background-color: rgb(1 59 35 / var(--tw-bg-opacity));
@@ -1131,6 +1159,10 @@ video {
 
 .bg-\[\#013b23e6\] {
   background-color: #013b23e6;
+}
+
+.bg-\[\#108D5933\] {
+  background-color: #108D5933;
 }
 
 .bg-\[\#C2C2C2\] {
@@ -1147,6 +1179,11 @@ video {
   background-color: rgb(209 228 207 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#D8E9A8\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(216 233 168 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#DDE3E0\] {
   --tw-bg-opacity: 1;
   background-color: rgb(221 227 224 / var(--tw-bg-opacity));
@@ -1161,6 +1198,10 @@ video {
   background-color: #FFFFFF33;
 }
 
+.bg-\[\#acc8a966\] {
+  background-color: #acc8a966;
+}
+
 .bg-\[\#f0f0f0e4\] {
   background-color: #f0f0f0e4;
 }
@@ -1173,6 +1214,11 @@ video {
 .bg-gray-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
+.bg-gray-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(107 114 128 / var(--tw-bg-opacity));
 }
 
 .bg-green-100 {
@@ -1230,6 +1276,10 @@ video {
 
 .bg-opacity-80 {
   --tw-bg-opacity: 0.8;
+}
+
+.bg-\[url\(\'\/imagenes\/blogs_bg\.jpg\'\)\] {
+  background-image: url('/imagenes/blogs_bg.jpg');
 }
 
 .bg-\[url\(\'\/imagenes\/foroUnido\.jpg\'\)\] {
@@ -1326,6 +1376,10 @@ video {
 
 .pb-40 {
   padding-bottom: 10rem;
+}
+
+.pt-32 {
+  padding-top: 8rem;
 }
 
 .text-center {
@@ -1728,6 +1782,10 @@ h6.ce-header {
     order: 2;
   }
 
+  .md\:mt-8 {
+    margin-top: 2rem;
+  }
+
   .md\:block {
     display: block;
   }
@@ -1742,6 +1800,10 @@ h6.ce-header {
 
   .md\:hidden {
     display: none;
+  }
+
+  .md\:h-full {
+    height: 100%;
   }
 
   .md\:w-10 {
@@ -1822,6 +1884,11 @@ h6.ce-header {
   .md\:px-3 {
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+  }
+
+  .md\:py-8 {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 
   .md\:text-start {

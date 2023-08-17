@@ -1,31 +1,3 @@
-
-<?php
-
-// $errores = [];
-// $registroExitoso = false;
-
-
-
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-//     $usuario['nombre']   = sanitizar($_POST['nombre']) ?? '';
-//     $usuario['usuario']  = sanitizar($_POST['usuario']) ?? '';
-//     $usuario['email']   = strtolower(sanitizar($_POST['email'])) ?? '';
-//     $usuario['password'] = sanitizar($_POST['password']) ?? '';
-
-//     $newUsuario = new Usuarios($usuario);
-        
-//     $newUsuario->validar();
-
-//     if(empty($newUsuario::getErrors())){
-//         $registroExitoso = $newUsuario->crearCuenta();
-//     }
-
-// }
-
-?>
-
-
 <h1 class="font-bold text-xl">Logo Here</h1>
 <p class="text-gray-400">Welcome Back</p>
 <h1 class="font-bold text-3xl">Registro</h1>

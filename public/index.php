@@ -5,6 +5,7 @@
 $router = new Router;
 
 $router->get("/", [IndexController::class, 'index']);
+
 $router->get("/sobre-nosotros", [IndexController::class, 'sobreNosotros']);
 
 
@@ -12,6 +13,7 @@ $router->get("/logout", [IndexController::class, 'logout']);
 
 $router->get("/login", [IndexController::class, 'login']);
 $router->post("/login", [IndexController::class, 'login']);
+
 $router->get("/registro", [IndexController::class, 'registro']);
 $router->post("/registro", [IndexController::class, 'registro']);
 
@@ -27,6 +29,11 @@ $router->get("/misforos", [ForoController::class, 'forosUnidos']);
 $router->post("/misforos", [ForoController::class, 'forosUnidos']);
 
 $router->get("/misforos/foro", [ForoController::class, 'infoForo']);
+$router->post("/misforos/foro", [ForoController::class, 'infoForo']);
+
+
+$router->post("/foro/mensaje", [ForoController::class, 'enviarComentario']);
+
 
 $router->get("/perfil/foro", [ForoController::class, 'foros']);
 $router->post("/perfil/foro", [ForoController::class, 'foros']);
@@ -47,7 +54,8 @@ $router->post("/perfil/blog/crear", [BlogController::class, 'crear']);
 $router->get("/perfil/blog/editar", [BlogController::class, 'editar']);
 $router->post("/perfil/blog/editar", [BlogController::class, 'editar']);
 
-
+$router->get("/blogs", [BlogController::class, 'todosBlogs']);
+$router->get("/blogs/informacion", [BlogController::class, 'infoBlog']);
 
 $router->ejecutarRutas();
 

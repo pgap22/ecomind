@@ -29,13 +29,11 @@ class Blog extends ActiveRecord
         $this->fecha_creacion = $blog['fecha_creacion'] ?? date("Y-m-d H:i:s");
        
         $this->imagen_usuario = $blog['imagen_usuario'] ?? '';
+       
 
-        if(!empty($this->id_usuario) && empty($this->imagen_usuario)){
+        if(empty($this->imagen_usuario)){
             $usuario = Usuarios::find($this->id_usuario);
             $this->imagen_usuario = $usuario->imagen_url;
-        }
-        else{
-            $this->imagen_usuario = '';
         }
     }
 

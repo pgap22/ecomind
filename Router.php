@@ -48,7 +48,7 @@ class Router
     }
 
     public function setLayout(string $layout){
-        $file = file_exists("./../layouts/" .$layout. ".php"); 
+        $file = file_exists("./../layouts/" . $layout . ".php"); 
     
         $this->layout = $file ? "./../layouts/" .$layout. ".php" : null;
     }

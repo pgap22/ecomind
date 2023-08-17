@@ -140,9 +140,18 @@ class Foros extends ActiveRecord
         $idusuario = $_SESSION['usuario']['id'];
 
         try {
-            $ok = $this->executeSQL("INSERT INTO usuariosForos(id_foro, id_usuario) VALUES($idforo, $idusuario)");
+            $isInForo = $this->executeSQL("SELECT * FROM usuariosForos WHERE id_foro = $idforo AND id_usuario = $idusuario")->fetch_assoc();
+            
+            if($isInForo){
+                return true;
+            }
+
+            $ok = $this->executeSQL("INSERT INTO usuariosForos(id_foro, id_usuario, fecha_inscripcion) VALUES($idforo, $idusuario, NOW())");
             return $ok;
         } catch (\mysqli_sql_exception $th) {
+            echo '<pre>'; 
+            var_dump($th); 
+            echo '</pre>'; 
             return false;
         }
     }

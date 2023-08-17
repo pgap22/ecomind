@@ -22,22 +22,22 @@ function navUserButton($opcionesid, $menuid)
                  <img src='/imagenes/forosUnidos.svg' alt=''>
                  <p>Foros unidos</p>
              </a>
-             <div class='drop-link'>
+             <a href='/perfil/foro/crear' class='drop-link'>
                  <img src='/imagenes/forosCrear.svg' alt=''>
                  <p>Crear foro</p>
-             </div>
-             <div class='drop-link'>
+             </a>
+             <a href='/perfil/foro' class='drop-link'>
                  <img src='/imagenes/forosEditar.svg' alt=''>
                  <p>Editar foro</p>
-             </div>
-             <div class='drop-link'>
+             </a>
+             <a href='/perfil/blog/crear' class='drop-link'>
                  <img src='/imagenes/blogsCrear.svg' alt=''>
                  <p>Crear Blog</p>
-             </div>
-             <div class='drop-link'>
+             </a>
+             <a href='/perfil/blog' class='drop-link'>
                  <img src='/imagenes/blogsCreados.svg' alt=''>
                  <p>Blog Creados</p>
-             </div>
+             </a>
              <a href='/logout' class='drop-link'>
                  <img src='/imagenes/logout.svg' alt=''>
                  <p>Cerrar sesion</p>

@@ -2,19 +2,20 @@
 
 class ForoController
 {
-    public static function index(Router $router){
+    public static function index(Router $router)
+    {
 
-        if(isset($_GET['busqueda'])){
+        if (isset($_GET['busqueda'])) {
             $query = $_GET['busqueda'];
             $foros = Foros::busqueda($query);
-        }else{
+        } else {
             $foros = Foros::all();
         }
 
 
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-            if(!isset($_SESSION['usuario']['id'])){
+            if (!isset($_SESSION['usuario']['id'])) {
                 header("location: /login");
                 return;
             }
@@ -23,11 +24,11 @@ class ForoController
 
             $foro->unirseForo();
 
-            header("location: /misforos/foro?id=".$foro->id);
+            header("location: /misforos/foro?id=" . $foro->id);
         }
-  
+
         $router->setLayout('inicio');
-        $router->render('paginas/foros',[
+        $router->render('paginas/foros', [
             "foros" => $foros
         ]);
     }
@@ -90,7 +91,7 @@ class ForoController
 
         $foro  = Foros::executeSQL("SELECT * from foros WHERE id_usuario = $usuarioID AND id = $id");
         $foro  = new Foros($foro->fetch_assoc());
-        
+
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
             foreach ($_POST as $key => $value) {
@@ -115,50 +116,97 @@ class ForoController
         }
 
         $router->setLayout('perfil');
-        $router->render("perfil/perfilEditarForo",[
+        $router->render("perfil/perfilEditarForo", [
             "foro" => $foro,
         ]);
     }
 
-    public static function infoForo(Router $router){
+    public static function infoForo(Router $router)
+    {
         $idForo = $_GET['id'];
         $idUsuario = $_SESSION['usuario']['id'];
 
+
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $id_foro = $_POST['id_foro'];
+
+            $foroUnidoSQL = "DELETE FROM usuariosforos WHERE id_usuario = $idUsuario AND id_foro = $id_foro";
+            Foros::executeSQL($foroUnidoSQL);
+            header("location: /misforos");
+            return;
+        }
+
+
         $foro = Foros::find($idForo);
 
-        $estaDentro = Foros::executeSQL("SELECT * FROM usuariosForos WHERE id_foro = $idForo AND id_usuario = $idUsuario")->fetch_assoc();
+        $cantidadUsuarios = Foros::executeSQL("SELECT * FROM usuariosForos where id_foro = $idForo")->fetch_all(MYSQLI_ASSOC);
+        $cantidadUsuarios = count($cantidadUsuarios);
+
         
-        if(!$estaDentro){
+        $estaDentro = Foros::executeSQL("SELECT * FROM usuariosForos WHERE id_foro = $idForo AND id_usuario = $idUsuario")->fetch_assoc();
+
+
+        //Obtener Comentarios
+        $comentarios = Foros::executeSQL("SELECT * FROM forosMensaje inner join usuarios ON forosMensaje.id_usuario=usuarios.id  WHERE id_foro = $idForo")->fetch_all(MYSQLI_ASSOC);
+        $comentariosForos = [];
+        foreach($comentarios as $comentario){
+            if($comentario["id_usuario"]==$idUsuario){
+                $comentario["mensajePropio"] = true;
+                $comentariosForos[] = $comentario;
+            }else{
+                $comentariosForos[] =$comentario;
+            }
+        }
+
+     
+        if (!$estaDentro) {
             header("location: /foros");
         }
 
         $router->setLayout('inicio');
         $router->render('foro/foro', [
-            "foro" => $foro
+            "foro" => $foro,
+            "cantidadUsuarios" => $cantidadUsuarios,
+            "comentarios" => $comentariosForos,
         ]);
     }
-
-    public static function forosUnidos(Router $router){
-        if(isset($_GET['busqueda'])){
+    public static function forosUnidos(Router $router)
+    {
+        if (isset($_GET['busqueda'])) {
             $query = $_GET['busqueda'];
             $foros = Foros::busquedaForosUnidos($query);
-        }else{
+        } else {
             $foros = Foros::obtenerForosUnidos();
         }
 
 
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $foro = Foros::find($_POST['id']);
 
             $foro->unirseForo();
 
-            header("location: /misforos/foro?id=".$foro->id);
+            header("location: /misforos/foro?id=" . $foro->id);
         }
-  
+
         $router->setLayout('inicio');
-        $router->render('paginas/foros',[
+        $router->render('paginas/foros', [
             "foros" => $foros,
             "foroUnido" => true,
         ]);
+    }
+
+    public static function enviarComentario(Router $router){
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $idUsuario = $_SESSION['usuario']['id'];
+            $idForo = $_POST['foro_id'] ?? '';
+            $mensaje = $_POST['comentario'] ?? '';
+
+            if(!$idForo) return;
+            if(!$mensaje) return;
+
+            Foros::executeSQL("INSERT INTO forosmensaje SET mensaje = '$mensaje', id_foro = $idForo, id_usuario = $idUsuario");
+
+            header("location: /misforos/foro?id=".$idForo);
+        }
     }
 }

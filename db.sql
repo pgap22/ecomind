@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB
-AUTO_INCREMENT = 42
+AUTO_INCREMENT = 47
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`blog` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 23
+AUTO_INCREMENT = 26
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`foros` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 38
+AUTO_INCREMENT = 41
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -103,6 +103,7 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`forosmensaje` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 14
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -177,21 +178,22 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`usuariosforos` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `id_foro` INT(11) NOT NULL,
   `id_usuario` INT(11) NOT NULL,
+  `fecha_inscripcion` DATETIME NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_usuario_UNIQUE` (`id_usuario` ASC),
-  INDEX `fk_usuariosForos_foros` (`id_foro` ASC),
-  CONSTRAINT `fk_usuariosForos_foros`
+  INDEX `fk_usuarioFOros_idx` (`id_usuario` ASC),
+  INDEX `fk_forosUsuarios_idx` (`id_foro` ASC),
+  CONSTRAINT `fk_forosUsuarios`
     FOREIGN KEY (`id_foro`)
     REFERENCES `ecomind`.`foros` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_usuariosForos_usuarios`
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuarioFOros`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `ecomind`.`usuarios` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 17
 DEFAULT CHARACTER SET = utf8;
 
 

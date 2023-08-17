@@ -88,7 +88,7 @@
             <div class="flex flex-col gap-4">
                 <div>
                     <h3 class="subtitulo">Foros Unidos</h3>
-                    <p>0</p>
+                    <p><?=$forosUnidos ?></p>
                 </div>
 
                 <div>
@@ -107,24 +107,28 @@
 
     </div>
     <div class="lg:flex justify-between xl:flex-col">
-        <section class="mt-4">
-            <h2 class="titulo">Ultimo Foro Unido</h2>
-            <div class="max-w-[320px] mt-4 w-fit relative">
-                <img class="aspect-square object-cover rounded-xl" src="/foroimg/default_3.jpg" alt="">
 
-                <div class="absolute bottom-2 cursor-pointer bg-white opacity-80 w-[80%] text-center py-2 rounded-full left-1/2 -translate-x-1/2">
-                    <p class="text-lg font-bold break-words text-[#272D37]">EcoConsejos Sostenibles</p>
+        <?php if (isset($ultimoForoUnido['id'])) : ?>
+            <section class="mt-4">
+                <h2 class="titulo">Ultimo Foro Unido</h2>
+                <div class="max-w-[320px] mt-4 w-fit relative">
+                    <img class="aspect-square object-cover rounded-xl" src="<?=$ultimoForoUnido['imagen_url']?>" alt="">
+
+                    <div class="absolute bottom-2 cursor-pointer bg-white opacity-80 w-[80%] text-center py-2 rounded-full left-1/2 -translate-x-1/2">
+                        <p class="text-lg font-bold break-words text-[#272D37]"><?= $ultimoForoUnido['nombre'] ?></p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        <?php endif ?>
+
         <?php if (isset($ultimoForoCreado->id)) : ?>
             <section class="mt-4">
                 <h2 class="titulo">Ultimo Foro Creado</h2>
                 <div class="max-w-[320px] mt-4 w-fit relative">
-                    <img class="aspect-square object-cover rounded-xl" src="<?=$ultimoForoCreado->imagen_url ?>"  alt="">
+                    <img class="aspect-square object-cover rounded-xl" src="<?= $ultimoForoCreado->imagen_url ?>" alt="">
 
                     <div class="absolute bottom-2 cursor-pointer bg-white opacity-80 w-[80%] text-center py-2 rounded-full left-1/2 -translate-x-1/2">
-                        <p class="text-lg font-bold break-words text-[#272D37]"><?=$ultimoForoCreado->nombre?> </p>
+                        <p class="text-lg font-bold break-words text-[#272D37]"><?= $ultimoForoCreado->nombre ?> </p>
                     </div>
                 </div>
             </section>

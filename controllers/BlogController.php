@@ -25,7 +25,7 @@ class BlogController{
                 ...$_POST,
                 "id_usuario" => $_SESSION['usuario']['id']
             ]);
-
+   
             $blog->validar();
             
             if(empty($blog->getErrors())){
@@ -87,5 +87,25 @@ class BlogController{
         ]);
     }
 
+    public static function todosBlogs(Router $router){
+
+        $blogs = Blog::all();
+
+        $router->setLayout("inicio");
+        $router->render("blog/blog", [
+            "blogs" => $blogs ?? ''
+        ]);
+    }
+
+    public static function infoBlog(Router $router){
+        $id_blog = $_GET['id'] ?? '';
+        
+        $blog = Blog::find($id_blog);
+
+        $router->setLayout("inicio");
+        $router->render("blog/info", [
+            "blog" => $blog ?? ''
+        ]);
+    }
 
 }
