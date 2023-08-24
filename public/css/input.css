@@ -96,3 +96,12 @@ h5.ce-header{
 h6.ce-header{
   @apply !font-bold !text-xs;
 }
+
+
+.codex-editor__redactor{
+  word-wrap: break-word;
+}
+
+.ce-block__content{
+  max-width: unset;
+}

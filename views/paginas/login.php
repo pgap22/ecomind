@@ -14,7 +14,7 @@
     <div class="flex flex-col gap-1">
         <div class="flex justify-between">
             <label for="nombre">Contraseña</label>
-            <a class="text-gray-500" href="/olvidar-password">Olvidaste tu contraseña ?</a>
+            <!-- <a class="text-gray-500" href="/olvidar-password">Olvidaste tu contraseña ?</a> -->
         </div>
         <input class="p-2 bg-[#D1E4CF]  rounded-md outline-none" name="password" value="<?=getValue("password")?>" type="password" placeholder="Nombre">
     </div>

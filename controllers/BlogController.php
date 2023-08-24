@@ -101,10 +101,15 @@ class BlogController{
         $id_blog = $_GET['id'] ?? '';
         
         $blog = Blog::find($id_blog);
+        $usuarioBlog = Usuarios::find($blog->id_usuario);
+        $blogsRecomendados = Blog::blogRecomendados($id_blog);
+
 
         $router->setLayout("inicio");
         $router->render("blog/info", [
-            "blog" => $blog ?? ''
+            "blog" => $blog ?? '',
+            "usuarioBlog" => $usuarioBlog ?? '',
+            "blogsRecomendados" => $blogsRecomendados ?? '',
         ]);
     }
 

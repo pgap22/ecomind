@@ -89,4 +89,15 @@ class Blog extends ActiveRecord
 
         $this->setData('imagen_url', $path);
     }
+
+    public static function blogRecomendados($id){
+        $blogsSQL = static::executeSQL("SELECT * FROM blog WHERE id != $id ORDER BY RAND()  LIMIT 3 ");
+        $blogs = $blogsSQL->fetch_all(MYSQLI_ASSOC);
+
+        $blogs = array_map(function($blog){
+            return new self($blog);
+        },$blogs);
+
+        return $blogs;
+    }
 }
