@@ -3,7 +3,7 @@
 class Usuarios extends ActiveRecord
 {
     protected static $table = "usuarios";
-    protected static $dbColumn = ["id", "nombre", "usuario", "email", "password", "imagen_url"];
+    protected static $dbColumn = ["id", "nombre", "usuario", "email", "password", "imagen_url", "rol", "estado"];
 
     public $id;
     public $nombre;
@@ -11,6 +11,8 @@ class Usuarios extends ActiveRecord
     public $email;
     public $password;
     public $imagen_url;
+    public $rol;
+    public $estado;
 
     public function __construct($usuario)
     {
@@ -20,6 +22,8 @@ class Usuarios extends ActiveRecord
         $this->email = $usuario['email'] ?? '';
         $this->password = $usuario['password'] ?? '';
         $this->imagen_url = $usuario['imagen_url'] ?? '/avatars/default.png';
+        $this->rol = $usuario['rol'] ?? 'usuario';
+        $this->estado = $usuario['estado'] ?? 'normal';
     }
 
     public function validar()
@@ -83,13 +87,13 @@ class Usuarios extends ActiveRecord
         }
 
 
-
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
             static::$errors[] = [
                 "error" => "El email no es valido",
                 "code" => 5
             ];
         }
+
     }
 
     public function validarPerfil()
@@ -182,9 +186,19 @@ class Usuarios extends ActiveRecord
 
         $usuarioCreado = static::$db->query($sql)->fetch_assoc();
 
+
         if ($usuarioCreado) {
-            $_SESSION['usuario'] = $usuarioCreado;
-            header("location: /");
+            if($usuarioCreado['estado'] == "ban"){
+                static::$errors[] = [
+                    "error" => "Has sido baneado de ecomind",
+                    "code" => 22
+                ];
+            }
+            else{
+                $_SESSION['usuario'] = $usuarioCreado;
+                header("location: /");
+            }
+
         } else {
             static::$errors[] = [
                 "error" => "Credenciales incorrectas",

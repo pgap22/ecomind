@@ -112,7 +112,7 @@
             <section class="mt-4">
                 <h2 class="titulo">Ultimo Foro Unido</h2>
                 <div class="max-w-[320px] mt-4 w-fit relative">
-                    <img class="aspect-square object-cover rounded-xl" src="<?=$ultimoForoUnido['imagen_url']?>" alt="">
+                    <img width="320" class="aspect-square object-cover rounded-xl" src="<?=$ultimoForoUnido['imagen_url']?>" alt="">
 
                     <div class="absolute bottom-2 cursor-pointer bg-white opacity-80 w-[80%] text-center py-2 rounded-full left-1/2 -translate-x-1/2">
                         <p class="text-lg font-bold break-words text-[#272D37]"><?= $ultimoForoUnido['nombre'] ?></p>
@@ -125,7 +125,7 @@
             <section class="mt-4">
                 <h2 class="titulo">Ultimo Foro Creado</h2>
                 <div class="max-w-[320px] mt-4 w-fit relative">
-                    <img class="aspect-square object-cover rounded-xl" src="<?= $ultimoForoCreado->imagen_url ?>" alt="">
+                    <img width="320" class="aspect-square object-cover rounded-xl" src="<?= $ultimoForoCreado->imagen_url ?>" alt="">
 
                     <div class="absolute bottom-2 cursor-pointer bg-white opacity-80 w-[80%] text-center py-2 rounded-full left-1/2 -translate-x-1/2">
                         <p class="text-lg font-bold break-words text-[#272D37]"><?= $ultimoForoCreado->nombre ?> </p>

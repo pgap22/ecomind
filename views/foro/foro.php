@@ -1,16 +1,15 @@
-
 <div class="flex bg-[#D1E4CF66] flex-col   md:items-center md:text-start justify-between gap-4 md:grid md:grid-cols-2">
     <div style="background-image: url('<?= $foro->imagen_url ?>');" class="bg-gray-500 bg-cover h-60 w-full md:h-full">
 
     </div>
     <div class="flex flex-col gap-5 md:grid md:grid-cols-2 md:py-8 p-2">
-        
+
         <form method="post" class="flex gap-10 flex-col">
             <div class=" space-y-4">
                 <h2 class="font-bold text-xl"><?= $foro->nombre ?></h2>
                 <p><?= $foro->descripcion ?></p>
             </div>
-            <input type="text" hidden name="id_foro" value=<?=$foro->id ?>>
+            <input type="text" hidden name="id_foro" value=<?= $foro->id ?>>
             <button class="flex gap-2 items-center md:mt-8 w-fit">
                 <img width="28" src="/imagenes/abandonar.svg" alt="">
                 <p class="text-[#013B23] font-bold">Abandonar</p>
@@ -59,12 +58,22 @@
             }
             ?>
 
-            <div class="<?= $clases ?> p-2 rounded-md gap-5 grid grid-cols-[max-content_1fr]">
+            <div class="<?= $clases ?> p-4 rounded-md gap-5 grid grid-cols-[max-content_1fr]">
                 <div class="flex items-start justify-center">
                     <img class="rounded-full w-12 aspect-square" src="<?= $comentario['imagen_url'] ?>" alt="">
                 </div>
-                <div class="max-w-xs">
-                    <p class="font-bold"><?= $comentario["usuario"] ?></p>
+                <div class="max-w-full">
+                    <div class="flex relative items-center">
+                        <p class="font-bold"><?= $comentario["usuario"] ?></p>
+                    
+                        <?php if ($idUsuario != $comentario['id_usuario'] && $comentario['rol'] == 'usuario') : ?>
+                            <img class="cursor-pointer" onclick='acciones(<?= $comentario["id"] ?>)' src="/imagenes/mas.svg" width="24" alt="">
+                            <form action="/reportar?id_foro=<?=$foro->id ?>" method="post" data-reportar id="reportar-<?= $comentario['id'] ?>" class="absolute bg-white hidden flex-col border p-2 top-[10px] left-[110px]">
+                                <button name="id" value="<?= $comentario["id_usuario"] ?>" class="p-2 hover:bg-gray-100 rounded-md select-none cursor-pointer">Reportar Cuenta</button>
+                            </form>
+                        <?php endif ?>
+
+                    </div>
                     <p class="break-all"><?= $comentario['mensaje'] ?></p>
                 </div>
             </div>
@@ -77,6 +86,16 @@
 
 <script defer>
     const fecha = document.getElementById("fecha");
+
+    function acciones(id) {
+        const reportesDIVS = document.querySelectorAll("[data-reportar]")
+
+        reportesDIVS.forEach(reporte => reporte.style.display = 'none')
+
+        const reporteDiv = document.getElementById("reportar-" + id);
+        reporteDiv.style.display = 'flex';
+    }
+
     fecha.innerHTML = new Date(fecha.textContent.split(" ")[0]).toLocaleString('es-ES', {
         weekday: 'long',
         month: 'long',

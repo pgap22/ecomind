@@ -127,7 +127,7 @@ class ForoController
         $idUsuario = $_SESSION['usuario']['id'];
 
 
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $id_foro = $_POST['id_foro'];
 
             $foroUnidoSQL = "DELETE FROM usuariosforos WHERE id_usuario = $idUsuario AND id_foro = $id_foro";
@@ -142,23 +142,24 @@ class ForoController
         $cantidadUsuarios = Foros::executeSQL("SELECT * FROM usuariosForos where id_foro = $idForo")->fetch_all(MYSQLI_ASSOC);
         $cantidadUsuarios = count($cantidadUsuarios);
 
-        
+
         $estaDentro = Foros::executeSQL("SELECT * FROM usuariosForos WHERE id_foro = $idForo AND id_usuario = $idUsuario")->fetch_assoc();
 
 
         //Obtener Comentarios
-        $comentarios = Foros::executeSQL("SELECT * FROM forosMensaje inner join usuarios ON forosMensaje.id_usuario=usuarios.id  WHERE id_foro = $idForo")->fetch_all(MYSQLI_ASSOC);
+        $comentarios = Foros::executeSQL("SELECT usuarios.*,forosMensaje.* FROM forosMensaje inner join usuarios ON forosMensaje.id_usuario=usuarios.id  WHERE id_foro = $idForo ORDER BY creado DESC")->fetch_all(MYSQLI_ASSOC);
         $comentariosForos = [];
-        foreach($comentarios as $comentario){
-            if($comentario["id_usuario"]==$idUsuario){
+
+        foreach ($comentarios as $comentario) {
+            if ($comentario["id_usuario"] == $idUsuario) {
                 $comentario["mensajePropio"] = true;
                 $comentariosForos[] = $comentario;
-            }else{
-                $comentariosForos[] =$comentario;
+            } else {
+                $comentariosForos[] = $comentario;
             }
         }
 
-     
+
         if (!$estaDentro) {
             header("location: /foros");
         }
@@ -168,6 +169,8 @@ class ForoController
             "foro" => $foro,
             "cantidadUsuarios" => $cantidadUsuarios,
             "comentarios" => $comentariosForos,
+            "idUsuario" => $idUsuario,
+            "rol" => $_SESSION['usuario']['rol']
         ]);
     }
     public static function forosUnidos(Router $router)
@@ -195,18 +198,20 @@ class ForoController
         ]);
     }
 
-    public static function enviarComentario(Router $router){
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
+    public static function enviarComentario(Router $router)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $idUsuario = $_SESSION['usuario']['id'];
             $idForo = $_POST['foro_id'] ?? '';
             $mensaje = $_POST['comentario'] ?? '';
 
-            if(!$idForo) return;
-            if(!$mensaje) return;
+            if (!$idForo) return;
+            if (!$mensaje) return;
 
             Foros::executeSQL("INSERT INTO forosmensaje SET mensaje = '$mensaje', id_foro = $idForo, id_usuario = $idUsuario");
 
-            header("location: /misforos/foro?id=".$idForo);
+            header("location: /misforos/foro?id=" . $idForo);
         }
     }
+
 }

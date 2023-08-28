@@ -29,8 +29,9 @@
     <div class="p-4 bg-[#D1E4CF66] flex flex-col items-center ">
         <div class="max-w-7xl">
             <header class="flex justify-between items-center">
-                <img width="50" class="md:w-24" src="./imagenes/logo.svg" alt="">
-
+                <a href="/">
+                    <img width="50" class="md:w-24" src="/imagenes/logo.svg" alt="">
+                </a>
                 <nav class="hidden md:flex justify-between items-center gap-4">
                     <a href="/" class="font-bold text-[#1D1D1D]">Inicio</a>
                     <a href="/blogs" class="font-bold text-[#1D1D1D]">Blog</a>

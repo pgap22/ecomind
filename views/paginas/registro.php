@@ -1,5 +1,7 @@
-<h1 class="font-bold text-xl">Logo Here</h1>
-<p class="text-gray-400">Welcome Back</p>
+<a href="/">
+    <img width="50" class="md:w-24" src="/imagenes/logo.svg" alt="">
+</a>
+<p class="text-gray-400">Crea tu cuenta en ecomind !</p>
 <h1 class="font-bold text-3xl">Registro</h1>
 
 <?= mostrarError($newUsuario ?? '') ?>
@@ -26,7 +28,8 @@
         <button type="submit" class="bg-[#013B23] p-2 rounded-full font-medium text-lg  text-white">Crea tu cuenta </button>
     </form>
     <p class="text-gray-500">Ya tienes cuenta ?<a class="text-[#013B23]" href="/login">Inicia sesion!</a> </p>
-<?php else: ?>
-    <h2>Registro exitoso !</h2>
-    <a href="/login">Login</a>
-<?php endif ?>
+<?php else: 
+
+header("location: /login");
+
+endif ?>

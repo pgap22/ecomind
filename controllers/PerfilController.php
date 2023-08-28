@@ -15,7 +15,7 @@ class PerfilController{
 
         $cantidadForoUnidos = count($ultimoForoUnido);
 
-        $ultimoForoUnido = $ultimoForoUnido[0];
+        $ultimoForoUnido = $ultimoForoUnido[0] ?? '';
 
         if($ultimoForoExiste){
             $ultimoForoCreado = new Foros($ultimoForoExiste);
@@ -48,6 +48,35 @@ class PerfilController{
             "blogs" => $blogs ?? '',
             "ultimoForoCreado" => $ultimoForoCreado ?? '',
             "ultimoForoUnido" => $ultimoForoUnido ?? '',
+        ]);
+    }
+
+    public static function reportes(Router $router){
+
+        $reportes = ActiveRecord::executeSQL("SELECT reportescuentas.id_usuarioReportado, COUNT(*) AS cantidad_repeticiones, usuarios.*
+        FROM ecomind.reportescuentas
+        INNER JOIN usuarios ON id_usuarioReportado=usuarios.id
+        GROUP BY id_usuarioReportado")->fetch_all(MYSQLI_ASSOC);
+
+        $router->setLayout('perfil');
+        $router->render("perfil/reportes", [
+            "active" => "reportes",
+            "reportes"=> $reportes
+        ]);
+    }
+
+    public static function reportesMensaje(Router $router){
+
+        $idUsuarioReportado = $_GET["id"];
+
+        $mensajes = ActiveRecord::executeSQL("SELECT * FROM forosmensaje WHERE id_usuario = $idUsuarioReportado")->fetch_all(MYSQLI_ASSOC);
+
+        $usuarioReportado = Usuarios::find($idUsuarioReportado);
+
+        $router->setLayout("perfil");
+        $router->render("perfil/reportesMensaje", [
+            "usuarioReportado" => $usuarioReportado,
+            "mensajes" => $mensajes
         ]);
     }
 }

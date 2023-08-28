@@ -1,6 +1,8 @@
-<h1 class="font-bold text-xl">Logo Here</h1>
-<p class="text-gray-400">Welcome Back</p>
-<h1 class="font-bold text-3xl">Login</h1>
+<a href="/">
+    <img width="50" class="md:w-24" src="/imagenes/logo.svg" alt="">
+</a>
+<p class="text-gray-400">Bienvenido de vuelta !</p>
+<h1 class="font-bold text-3xl">Inicio de sesion</h1>
 
 <?= mostrarError($usuarioLogin ?? '') ?>
 
