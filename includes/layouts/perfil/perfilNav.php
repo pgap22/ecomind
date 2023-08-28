@@ -29,7 +29,7 @@
         <p>Blog Creados</p>
     </a>
 
-    <?php if (true) : ?>
+    <?php if ($_SESSION['usuario']['rol']=="admin") : ?>
         <a href="/perfil/reportes" class="flex items-center cursor-pointer gap-2 p-2 <?= activeLink('reportes', $active) ?>">
             <img width="32" src="/imagenes/reporte.svg" alt="">
             <p>Reportes</p>
