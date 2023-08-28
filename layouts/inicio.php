@@ -63,6 +63,8 @@ $navDesktop =  navUserButton("usuario-opciones", "usuario-menu");
         <?php include $contenido ?>
     </div>
 
+    <div class="fixed  bottom-0 left-0 bg-white p-2 border rounded-md" id="google_translate_element"></div>
+
     <footer class="bg-[#D1E4CF66] p-4 space-y-2 items-center xl:flex xl:justify-between">
         <img width="62" src="/imagenes/logo.svg" alt="logo">
         <div class="flex flex-col xl:flex-row xl:border-none gap-4 py-4 border-t border-b border-green-700">
@@ -74,6 +76,19 @@ $navDesktop =  navUserButton("usuario-opciones", "usuario-menu");
         <p>ecomind@gmail.com</p>
         <p>Derechos reservados 2023</p>
     </footer>
+
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                includedLanguages: "en,es",
+                autoDisplay: false,
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 
 </html>

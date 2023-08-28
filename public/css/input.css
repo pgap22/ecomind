@@ -105,3 +105,17 @@ h6.ce-header{
 .ce-block__content{
   max-width: unset;
 }
+
+div iframe{
+  display: none;
+}
+body{
+  top: 0px!important;
+}
+img[src='https://www.google.com/images/cleardot.gif']
+{
+  display: none !important;
+}
+ .goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed span[style] {
+  display: none;
+}
