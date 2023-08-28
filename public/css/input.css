@@ -119,3 +119,7 @@ img[src='https://www.google.com/images/cleardot.gif']
  .goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed span[style] {
   display: none;
 }
+
+body > div.skiptranslate{
+display: none;
+}

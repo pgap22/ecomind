@@ -1777,6 +1777,10 @@ img[src='https://www.google.com/images/cleardot.gif']
   display: none;
 }
 
+body > div.skiptranslate{
+  display: none;
+}
+
 .file\:cursor-pointer::file-selector-button {
   cursor: pointer;
 }
