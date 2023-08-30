@@ -141,13 +141,13 @@
         <section class="text-center py-10 p-4 space-y-12 flex flex-col items-center">
             <div class="space-y-4">
                 <h2 class="font-bold capitalize text-3xl md:text-5xl">Algunas de las plantas</h2>
-                <p class="text-[#707070] md:text-xl">Que tenemos para que aprender a cuidarlas</p>
+                <p class="text-[#707070] md:text-xl">Que puedes encontar en tu entorno son:</p>
             </div>
             <div class="grid grid-cols-2 xl:grid-cols-4 items-center gap-4">
                 <img class="rounded-md" src="/imagenes/planta.jpg" alt="planta">
-                <img class="rounded-md" src="/imagenes/planta.jpg" alt="planta">
-                <img class="rounded-md" src="/imagenes/planta.jpg" alt="planta">
-                <img class="rounded-md" src="/imagenes/planta.jpg" alt="planta">
+                <img class="rounded-md" src="/imagenes/planta2.jpg" alt="planta">
+                <img class="rounded-md" src="/imagenes/planta3.jpg" alt="planta">
+                <img class="rounded-md" src="/imagenes/planta4.jpg" alt="planta">
             </div>
         </section>
 
@@ -172,12 +172,7 @@
                     </div>
                 </div>
 
-                <div class="flex mt-6 justify-center gap-4">
-                    <div class="w-12  rounded-full bg-[#004F44]"></div>
-                    <div class="w-4 aspect-square rounded-full bg-[#C2C2C2]"></div>
-                    <div class="w-4 aspect-square rounded-full bg-[#C2C2C2]"></div>
-                    <div class="w-4 aspect-square rounded-full bg-[#C2C2C2]"></div>
-                </div>
+                
             </div>
 
 

@@ -23,7 +23,7 @@
                     <td class="p-4"><?= $reporte['cantidad_repeticiones'] ?></td>
                     <td>
                         <form action="/banear" method="post" class="p-4">
-                            <a href="/perfil/reportes/mensajes?id=<?= $reporte['id_usuarioReportado'] ?>" class="p-2 bg-green-800 rounded-md text-white font-bold">Ver Mensajes</a>
+                            <a href="/perfil/reportes/mensajes?id=<?= $reporte['id_usuarioReportado'] ?>" class="p-2 bg-green-800 rounded-md text-white font-bold">Ver Mensajes Reportados</a>
                             <?php if ($reporte['estado'] == "ban") : ?>
                                 <button name="id" value="<?= $reporte['id_usuarioReportado'] ?>" class="p-2 bg-gray-800 rounded-md text-white font-bold">Desbanear</button>
                             <?php else : ?>

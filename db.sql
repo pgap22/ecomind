@@ -5,9 +5,6 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
 -- Schema ecomind
 -- -----------------------------------------------------
 
@@ -32,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`usuarios` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB
--- AUTO_INCREMENT = 52
+AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -56,7 +53,6 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`blog` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
--- AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -79,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`foros` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
--- AUTO_INCREMENT = 41
+AUTO_INCREMENT = 2
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -92,6 +88,7 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`forosmensaje` (
   `id_usuario` INT(11) NOT NULL,
   `mensaje` TEXT NOT NULL,
   `creado` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `oculto` INT(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   INDEX `fk_forosMensaje_foros` (`id_foro` ASC),
   INDEX `fk_forosMensaje_usuarios` (`id_usuario` ASC),
@@ -106,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`forosmensaje` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
--- AUTO_INCREMENT = 24
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -117,9 +114,17 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`reportescuentas` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` INT(11) NOT NULL,
   `id_usuarioReportado` INT(11) NOT NULL,
+  `motivo` VARCHAR(45) NOT NULL,
+  `id_mensaje` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_reportesCuentas_usuarios` (`id_usuario` ASC),
   INDEX `fkUsuarioReportado_idx` (`id_usuarioReportado` ASC),
+  INDEX `fkMensajeUsuarioReport_idx` (`id_mensaje` ASC),
+  CONSTRAINT `fkMensajeUsuarioReport`
+    FOREIGN KEY (`id_mensaje`)
+    REFERENCES `ecomind`.`forosmensaje` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fkUsuarioReportado`
     FOREIGN KEY (`id_usuarioReportado`)
     REFERENCES `ecomind`.`usuarios` (`id`)
@@ -131,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`reportescuentas` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
--- AUTO_INCREMENT = 15
+AUTO_INCREMENT = 10
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -157,12 +162,12 @@ CREATE TABLE IF NOT EXISTS `ecomind`.`usuariosforos` (
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
--- AUTO_INCREMENT = 22
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8;
 
 INSERT INTO `usuarios`(nombre, usuario, email, password, imagen_url,rol,estado) VALUES('Moderador','moderador','moderador@ecomind.com','123123','/avatars/default.png','admin','normal');
 
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+

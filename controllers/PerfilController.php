@@ -69,7 +69,7 @@ class PerfilController{
 
         $idUsuarioReportado = $_GET["id"];
 
-        $mensajes = ActiveRecord::executeSQL("SELECT * FROM forosmensaje WHERE id_usuario = $idUsuarioReportado")->fetch_all(MYSQLI_ASSOC);
+        $mensajes = ActiveRecord::executeSQL("SELECT * FROM reportescuentas INNER JOIN forosmensaje ON id_mensaje = forosmensaje.id WHERE id_usuarioReportado = $idUsuarioReportado")->fetch_all(MYSQLI_ASSOC);
 
         $usuarioReportado = Usuarios::find($idUsuarioReportado);
 

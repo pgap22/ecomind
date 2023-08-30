@@ -32,7 +32,8 @@ class Router
             $fn = $this->rutasPOST[$ruta]["page"] ?? null;
             $auth = $this->rutasGET[$ruta]["auth"] ?? null;
             if ($auth && isset($_SESSION['usuario'])) {
-                $estado = $_SESSION['usuario']['estado'];
+                $estado = Usuarios::find($_SESSION['usuario']['id'])->estado;
+       
                 if ($estado === 'ban') {
                     session_destroy();
                     header("location: /");
@@ -48,7 +49,8 @@ class Router
             $fn = $this->rutasGET[$ruta]["page"] ?? null;
             $auth = $this->rutasGET[$ruta]["auth"] ?? null;
             if ($auth && isset($_SESSION['usuario'])) {
-                $estado = $_SESSION['usuario']['estado'];
+                $estado = Usuarios::find($_SESSION['usuario']['id'])->estado;
+
                 if ($estado === 'ban') {
                     session_destroy();
                     header("location: /");

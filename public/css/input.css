@@ -123,3 +123,7 @@ img[src='https://www.google.com/images/cleardot.gif']
 body > div.skiptranslate{
 display: none;
 }
+
+.codex-editor__redactor{
+  padding-bottom: 50px!important;
+}

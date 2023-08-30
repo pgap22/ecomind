@@ -4,6 +4,10 @@ class BlogController{
     public static function blogs(Router $router){
         $blogs = Blog::where("id_usuario", $_SESSION['usuario']['id'], 0);
         
+        if($_SESSION['usuario']['rol']=="admin"){
+            $blogs = Blog::all();
+        }
+
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $blog = Blog::find($_POST['id'] ?? null);
             if ($blog) {
@@ -51,6 +55,11 @@ class BlogController{
         $usuarioID = $_SESSION['usuario']['id'];
 
         $blog  = Blog::executeSQL("SELECT * from blog WHERE id_usuario = $usuarioID AND id = $id");
+
+        if($_SESSION['usuario']['rol']=="admin"){
+            $blog = Blog::executeSQL("SELECT * from blog WHERE id = $id");
+        }
+        
         $blog  = new Blog($blog->fetch_assoc());
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {

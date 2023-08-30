@@ -78,6 +78,10 @@ class ForoController
             }
         }
 
+        if($_SESSION['usuario']['rol']=="admin"){
+            $foros = Foros::all();
+        }
+
         $router->setLayout('perfil');
         $router->render('perfil/perfilForos', [
             "active" => 'foroCreados',
@@ -90,6 +94,10 @@ class ForoController
         $usuarioID = $_SESSION['usuario']['id'];
 
         $foro  = Foros::executeSQL("SELECT * from foros WHERE id_usuario = $usuarioID AND id = $id");
+        if($_SESSION['usuario']['rol']=="admin"){
+            $foro = Foros::executeSQL("SELECT * from foros WHERE id = $id");
+        }
+
         $foro  = new Foros($foro->fetch_assoc());
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -153,8 +161,8 @@ class ForoController
         foreach ($comentarios as $comentario) {
             if ($comentario["id_usuario"] == $idUsuario) {
                 $comentario["mensajePropio"] = true;
-                $comentariosForos[] = $comentario;
-            } else {
+            } 
+            if($comentario['oculto']==0){
                 $comentariosForos[] = $comentario;
             }
         }

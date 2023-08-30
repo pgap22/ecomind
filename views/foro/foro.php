@@ -65,12 +65,12 @@
                 <div class="max-w-full">
                     <div class="flex relative items-center">
                         <p class="font-bold"><?= $comentario["usuario"] ?></p>
-                    
+
                         <?php if ($idUsuario != $comentario['id_usuario'] && $comentario['rol'] == 'usuario') : ?>
-                            <img class="cursor-pointer" onclick='acciones(<?= $comentario["id"] ?>)' src="/imagenes/mas.svg" width="24" alt="">
-                            <form action="/reportar?id_foro=<?=$foro->id ?>" method="post" data-reportar id="reportar-<?= $comentario['id'] ?>" class="absolute bg-white hidden flex-col border p-2 top-[10px] left-[110px]">
-                                <button name="id" value="<?= $comentario["id_usuario"] ?>" class="p-2 hover:bg-gray-100 rounded-md select-none cursor-pointer">Reportar Cuenta</button>
-                            </form>
+                            <img class="cursor-pointer" onclick='acciones(<?= $comentario["id"] ?>,<?= $comentario["id_usuario"] ?>)' src="/imagenes/mas.svg" width="24" alt="">
+                            <div data-reportar id="reportar-<?= $comentario['id'] ?>" class="absolute bg-white hidden flex-col border p-2 top-[10px] left-[76px]">
+                                <button class="p-2 hover:bg-gray-100 rounded-md select-none cursor-pointer">Reportar Cuenta</button>
+                            </div>
                         <?php endif ?>
 
                     </div>
@@ -82,18 +82,60 @@
 
 </div>
 
-
+<div id="modal_reporte" class="fixed flex transition-all opacity-animar items-center justify-center top-0 left-0 right-0 bottom-0 bg-black bg-opacity-75">
+    <form action="/reportar?id_foro=<?= $foro->id ?>" method="post" class="bg-white space-y-2 p-4 rounded-md">
+        <div class="w-full flex items-center justify-between">
+            <h2 class="font-bold">Reporte De Mensaje</h2>
+            <img onclick="quitarReporte()" width="32" src="/imagenes/cancel.svg" alt="">
+        </div>
+        <p>Porque quieres reportar esta cuenta</p>
+        <select class="border-2 cursor-pointer w-full p-2" name="motivo">
+            <option value="Spam">Spam</option>
+            <option value="Incita al odio">Incita al odio</option>
+            <option value="Bullying">Bullying</option>
+            <option value="Estafa">Estafa</option>
+            <option value="Informacion falsa">Informacion falsa</option>
+            <option value="Violencia">Violencia</option>
+        </select>
+        <input name="id_comentario" type="text" hidden id="id_comentario">
+        <button name="id" id="id_usuario" class="bg-green-700 text-white font-bold p-2 w-full text-center rounded-md">Enviar Reporte</button>
+    </form>
+</div>
 
 <script defer>
     const fecha = document.getElementById("fecha");
+    const modalReporte =document.getElementById("modal_reporte")
+    const btnInput =document.getElementById("id_usuario");
+    const comentarioInput =document.getElementById("id_comentario")
 
-    function acciones(id) {
+    function acciones(id,id_usuario) {
         const reportesDIVS = document.querySelectorAll("[data-reportar]")
-
-        reportesDIVS.forEach(reporte => reporte.style.display = 'none')
-
         const reporteDiv = document.getElementById("reportar-" + id);
-        reporteDiv.style.display = 'flex';
+
+        if (reporteDiv.style.display == 'flex') {
+            reportesDIVS.forEach(reporte => reporte.style.display = 'none')
+            reporteDiv.style.display = 'none';
+            
+        } else {
+            reportesDIVS.forEach(reporte => reporte.style.display = 'none')
+            reporteDiv.style.display = 'flex';
+            reporteDiv.onclick = ()=> mostrarReportar(id,id_usuario);
+        }
+    }
+
+    modalReporte.addEventListener("click", e=>{
+        if(e.target.id!="modal_reporte")return;
+        modalReporte.classList.add("opacity-animar")
+    })
+    
+    function mostrarReportar(id_mensaje, id_usuario){
+        btnInput.value = id_usuario;
+        comentarioInput.value = id_mensaje;
+        modalReporte.classList.remove("opacity-animar")
+    }
+    
+    function quitarReporte(){
+        modalReporte.classList.add("opacity-animar")
     }
 
     fecha.innerHTML = new Date(fecha.textContent.split(" ")[0]).toLocaleString('es-ES', {
